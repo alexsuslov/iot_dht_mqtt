@@ -2,7 +2,6 @@
 #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
 #include <PubSubClient.h>
 
-
 #define POWER_PIN 12
 #define DHTPIN 14
 #define DHTTYPE DHT22
