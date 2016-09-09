@@ -44,7 +44,7 @@ void data_get(){
 
 
 /**
- * data_display send data to serial
+ * display data to serial
  * @return void
  */
 void data_display(){
