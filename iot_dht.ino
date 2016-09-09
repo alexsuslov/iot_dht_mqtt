@@ -1,27 +1,20 @@
+/*
+DHT to mqtt
+ */
 #include <DHT.h>
 #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
 #include <PubSubClient.h>
+#include "config.h"
 
-#define POWER_PIN 12
-#define DHTPIN 14
-#define DHTTYPE DHT22
-DHT dht(DHTPIN, DHTTYPE);
+
 float h; // Humidity
 float t; //Temperature
 float hic;
 int error;
-// wifi
-char* AP = "Amber";
-char* AP_KEY = "b7f3bbYD9yAP2Wii";
-// mqtt
-IPAddress MQTT_HOST(192,168,88,100);
-int   MQTT_PORT = 20000;
-char* MQTT_USER = "test";
-char* MQTT_PASS = "test";
-#define TIMEOUT 60 // 1min
 char tmpTOPIC[64] ;
 char tmpMSG[64];
-char* MQTT_TOPIC = "/belostrov/place1/";
+
+DHT dht(DHTPIN, DHTTYPE);
 WiFiClient espClient;
 PubSubClient client(espClient);
 
@@ -32,9 +25,11 @@ void setup() {
 }
 
 
-//////////////////////////////////////////
+/**
+ * Get data from sensor
+ * @return void
+ */
 void data_get(){
-
   digitalWrite(POWER_PIN, 1);
   delay(1000);
   h = dht.readHumidity();
@@ -48,7 +43,10 @@ void data_get(){
 }
 
 
-//////////////////////////////////////////
+/**
+ * data_display send data to serial
+ * @return void
+ */
 void data_display(){
   if (error){
     return;
@@ -66,6 +64,8 @@ void data_display(){
   Serial.print(hic);
   Serial.println(" *C ");
 }
+
+
 ///////////////////////////////////////////
 void wifi_connect(){
   if (error){
@@ -75,7 +75,7 @@ void wifi_connect(){
     return;
   }
 
-  WiFi.begin(AP, AP_KEY);
+  WiFi.begin(ACCESS_POINT, ACCESS_POINT_KEY);
   Serial.print("Connecting");
   int i = 50;
   while (WiFi.status() != WL_CONNECTED)

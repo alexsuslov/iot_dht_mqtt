@@ -1,0 +1,22 @@
+/*
+DHT to mqtt
+user config default
+ */
+// Hardware
+#define POWER_PIN 12
+#define DHTPIN 14
+// #define DHTTYPE DHT11
+#define DHTTYPE DHT22
+// wifi
+#define ACCESS_POINT "IoT"
+#define ACCESS_POINT_KEY "qwerty"
+
+// mqtt
+#define MQTT_HOST "mqtt.com"
+// IPAddress MQTT_HOST(192,168,88,100);
+#define MQTT_PORT 20000
+#define MQTT_USER "test"
+#define MQTT_PASS "test"
+// send to mqtt every 5мин
+#define TIMEOUT 5 * 60
+#define MQTT_TOPIC "/user/point/"
